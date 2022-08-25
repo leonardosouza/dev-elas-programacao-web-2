@@ -2,8 +2,11 @@
 const express = require("express");
 const app = express();
 
-// Importando Cookie Parser
+// Importando Middlewares
 const cookieParser = require("cookie-parser");
+const getAuthorization = require("./middlewares/authorization");
+const sanitizeCPF = require("./middlewares/sanitizeCPF");
+const checkStrongPassword = require("./middlewares/checkStrongPassword");
 
 // Variaveis de Ambiente
 const { PORT, USER, PASS } = require("dotenv").config().parsed;
@@ -52,7 +55,7 @@ app.post("/login",
         );
 */
 
-app.post("/login", (req, res) => {
+app.post("/login", sanitizeCPF, checkStrongPassword, (req, res) => {
   const { usr, pwd } = req.body;
   const authentication = (usr === USER && pwd === PASS);
 
@@ -77,16 +80,6 @@ app.post("/logout", (req, res) => {
 
 
 // Autorizacao
-const getAuthorization = (req, res, next) => {
-  const auth = Boolean(req.cookies.AUTH_APP);
-  
-  if (auth) {
-    next();
-  } else {
-    res.sendStatus(403);
-  }
-};
-
 app.get("/protected", 
   getAuthorization,
   (req, res) => {
@@ -102,6 +95,5 @@ app.get("/privated",
       .json({ route: req.path })
   }
 );
-
 
 app.listen(PORT, () => console.log(`Server running at port ${PORT}...`));

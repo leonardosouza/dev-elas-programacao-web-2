@@ -1,0 +1,10 @@
+// checkStrongPass
+// Requisitos:
+// Min: 1 letra maiuscula (65 à 90)
+// Min: 1 letra minuscula (97 à 122)
+// Min: 1 numero (48 à 57)
+// Min: 1 caracter especial (32 à 47, 58 à 64, 91 à 96)
+
+// DICA:
+// console.log( "Secreta$123".split("") );
+// console.log( "S".charCodeAt() );
