@@ -1,0 +1,10 @@
+body {
+  background-color: #dadada;
+}
+
+.container { 
+  border: 1px solid;
+  padding: 1em;
+  max-width: 30%;
+  background-color:bisque;
+}
