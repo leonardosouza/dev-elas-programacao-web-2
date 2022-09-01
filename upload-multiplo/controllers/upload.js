@@ -12,7 +12,6 @@ exports.upload = (req, res) => {
       res.render("error");
     }
   });
-
 };
 
 exports.index = (req, res) => {
